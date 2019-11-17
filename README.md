@@ -1,2 +1,12 @@
-# RN-Learn-1
-react-native学习1
+# react-native学习1
+---- 项目目录
+    ---- src
+        ---- views 视图文件夹
+            ---- WelcomePage 欢迎
+            ---- HomePage 首页
+            ---- PopularPage 最热
+            ---- TrendingPage 趋势
+            ---- FavoritePage 收藏
+            ---- MyPage 我的
+        ---- components 公共组件
+        ---- navigator 导航文件

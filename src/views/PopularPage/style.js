@@ -9,5 +9,17 @@ export const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
         margin: 10
+    },
+    tabStyle: {
+        minWidth: 50
+    },
+    indicatorStyle: {
+        height: 2,
+        backgroundColor: 'white'
+    },
+    labelStyle: {
+        fontSize: 13,
+        marginTop: 6,
+        marginBottom: 6
     }
 })

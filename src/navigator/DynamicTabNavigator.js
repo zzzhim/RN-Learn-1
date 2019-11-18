@@ -93,7 +93,7 @@ export default class DynamicTabNavigator extends Component {
     }
 }
 
-// 定制主题
+// 定制底部主题
 class TabBarComponent extends Component {
     constructor(props) {
         super(props)

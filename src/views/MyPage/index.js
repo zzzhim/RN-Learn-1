@@ -1,26 +1,26 @@
 import React, { Component } from 'react'
 import { Text, View, Button } from 'react-native'
 import { styles } from './style'
+import { connect } from 'react-redux'
+import { onThemeChange } from '../../action/theme'
 
-export default class MyPage extends Component {
+
+class MyPage extends Component {
     render() {
-        const { navigation } = this.props
-
         return (
             <View style={ styles.container }>
                 <Text style={ styles.welcome }> MyPage </Text>
                 <Button
                     title={ '修改主题' }
-                    onPress={ () => navigation.setParams(
-                        {
-                            theme: {
-                                tintColor: 'green',
-                                updateTime: new Date().getTime()
-                            }
-                        }
-                    ) }
+                    onPress={ () => this.props.onThemeChange('black')}
                 />
             </View>
         )
     }
 }
+
+const mapDispatchToProps = dispatch => ({
+    onThemeChange: theme => dispatch(onThemeChange(theme))
+})
+
+export default connect(null, mapDispatchToProps)(MyPage)

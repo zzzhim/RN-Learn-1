@@ -51,6 +51,13 @@ export default class PopularPage extends Component {
                 <Text onPress={ () => {
                     NavigationUtil.goPage({}, 'DetailPage')
                 } }>跳转到详情页面</Text>
+
+                <Button
+                    title="FetchDemo"
+                    onPress={ () => {
+                        NavigationUtil.goPage({}, 'FetchDemo')
+                    } } 
+                />
             </View>
         )
     }

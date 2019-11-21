@@ -57,6 +57,14 @@ export default class PopularPage extends Component {
                     onPress={ () => {
                         NavigationUtil.goPage({}, 'FetchDemo')
                     } } 
+                    
+                />
+
+                <Button
+                    title="AsyncStorage"
+                    onPress={ () => {
+                        NavigationUtil.goPage({}, 'AsyncStorage')
+                    } } 
                 />
             </View>
         )

@@ -8,6 +8,7 @@ import HomePage from '../views/HomePage/index'
 import DetailPage from '../views/DetailPage/index'
 import FetchDemo from '../views/FetchDemo/index'
 import AsyncStorage from '../views/AsyncStorage/index'
+import DataStoreDemoPage from '../views/DataStoreDemoPage/index'
 
 const InitNavigator = createStackNavigator(
     {
@@ -39,6 +40,9 @@ const MainNavigator = createStackNavigator(
             navigationOptions: {
                 
             }
+        },
+        DataStoreDemoPage: {
+            screen: DataStoreDemoPage
         }
     }
 )

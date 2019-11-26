@@ -66,6 +66,13 @@ export default class PopularPage extends Component {
                         NavigationUtil.goPage({}, 'AsyncStorage')
                     } } 
                 />
+
+                <Button
+                    title="DataStoreDemoPage"
+                    onPress={ () => {
+                        NavigationUtil.goPage({}, 'DataStoreDemoPage')
+                    } } 
+                />
             </View>
         )
     }

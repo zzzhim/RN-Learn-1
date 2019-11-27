@@ -22,7 +22,7 @@ export default function onAction(state = dafaultState, action) {
             return {
                 ...state,
                 [ action.storeName ]: { // 动态的设置store，和动态获取store(storeKey不固定)
-                    ...[ action.storeName ],
+                    ...state[ action.storeName ],
                     items: action.items,
                     isLoading: false
                 }
@@ -31,7 +31,7 @@ export default function onAction(state = dafaultState, action) {
             return {
                 ...state,
                 [ action.storeName ]: {
-                    ...[ action.storeName ],
+                    ...state[ action.storeName ],
                     isLoading: true
                 }
             }
@@ -39,7 +39,7 @@ export default function onAction(state = dafaultState, action) {
             return {
                 ...state,
                 [ action.storeName ]: {
-                    ...[ action.storeName ],
+                    ...state[ action.storeName ],
                     isLoading: false
                 }
             }

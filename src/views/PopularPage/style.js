@@ -21,5 +21,11 @@ export const styles = StyleSheet.create({
         fontSize: 13,
         marginTop: 6,
         marginBottom: 6
+    },
+    indicatorContainer: {
+        alignItems: 'center'
+    },
+    indicator: {
+        margin: 10
     }
 })

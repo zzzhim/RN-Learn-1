@@ -157,7 +157,7 @@ class PopularTab extends Component {
                     data={ store.projectModes }
                     renderItem={ data => this.renderItem(data) }
                     keyExtractor={ item => "" + item.id }
-                    refreshControl={
+                    refreshControl={ // 设置了此选项，则会在列表头部添加一个标准的RefreshControl控件，以便实现“下拉刷新”的功能。同时你需要正确设置refreshing属性。
                         <RefreshControl
                             title={ 'Loading' }
                             titleColor={ THEME_COLOR }
@@ -167,8 +167,8 @@ class PopularTab extends Component {
                             tintColor={ THEME_COLOR }
                         />
                     }
-                    ListFooterComponent={ () => this.genIndicator() }
-                    onEndReached={ () => {
+                    ListFooterComponent={ () => this.genIndicator() } // 尾部组件。可以是 React Component, 也可以是一个 render 函数，或者渲染好的 element。
+                    onEndReached={ () => { // 当列表被滚动到距离内容最底部不足onEndReachedThreshold的距离时调用。
                         setTimeout(() => {
                             if(this.canLoadMore) {
                                 this.loadData(true)
@@ -176,8 +176,8 @@ class PopularTab extends Component {
                             }
                         }, 100)
                     } }
-                    onEndReachedThreshold={ 0.5 } // 列表可见的比例值
-                    onMomentumScrollBegin={ () => this.canLoadMore = true }
+                    onEndReachedThreshold={ 0.5 } // 列表可见的比例值,决定当距离内容最底部还有多远时触发onEndReached回调。
+                    onMomentumScrollBegin={ () => this.canLoadMore = true } // 当一帧滚动开始时调用.
                 />
 
                 <Toast

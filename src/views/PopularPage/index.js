@@ -58,10 +58,11 @@ class PopularPage extends Component {
             {
                 tabBarOptions: {
                     tabStyle: styles.tabStyle,
-                    upperCaseLabel: false,
+                    upperCaseLabel: false, // 是否使标签大写,默认为true
                     scrollEnabled: true,
                     style: {
-                        backgroundColor: '#a67'
+                        backgroundColor: '#a67',
+                        // height: 30 // fix 开启scrollEnabled后在Android上初次加载时闪烁的问题
                     },
                     indicatorStyle: styles.indicatorStyle,
                     labelStyle: styles.labelStyle

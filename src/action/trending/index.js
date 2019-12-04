@@ -9,21 +9,21 @@ import { handleData } from '../actionUtil'
  * @param pageSize
  * @return { function(*=) } 
  */
-export function onRefreshPopular(storeName, url, pageSize) {
+export function onRefreshTrending(storeName, url, pageSize) {
     return dispatch => {
         dispatch({
-            type: Types.POPULAR_REFRESH,
+            type: Types.TRENDING_REFRESH,
             storeName
         })
         let dataStore = new DataStore()
-        dataStore.fetchData(url, FLAG_STORAGE.flag_popular) // 异步action与数据流
+        dataStore.fetchData(url, FLAG_STORAGE.flag_trending) // 异步action与数据流
             .then(data => {
-                handleData(Types.POPULAR_REFRESH_SUCCESS, dispatch, storeName, data, pageSize)
+                handleData(Types.TRENDING_REFRESH_SUCCESS, dispatch, storeName, data, pageSize)
             })
             .catch(error => {
                 console.log(error)
                 dispatch({
-                    type: Types.POPULAR_REFRESH_FATL,
+                    type: Types.TRENDING_REFRESH_FATL,
                     storeName,
                     error
                 })
@@ -41,7 +41,7 @@ export function onRefreshPopular(storeName, url, pageSize) {
  * @param {*} callBack
  * @return { function(*) }
  */
-export function onLoadMorePopular(storeName, pageIndex, pageSize, dataArray = [], callBack) {
+export function onLoadMoreTrending(storeName, pageIndex, pageSize, dataArray = [], callBack) {
     return dispatch => {
         setTimeout(() => {
             if((pageIndex - 1) * pageSize >= dataArray.length) {
@@ -49,7 +49,7 @@ export function onLoadMorePopular(storeName, pageIndex, pageSize, dataArray = []
                     callBack('no more')
                 }
                 dispatch({
-                    type: Types.POPULAR_LOAD_MORE_FAIL,
+                    type: Types.TRENDING_LOAD_MORE_FAIL,
                     error: 'no more',
                     storeName: storeName,
                     pageIndex: --pageIndex,
@@ -58,7 +58,7 @@ export function onLoadMorePopular(storeName, pageIndex, pageSize, dataArray = []
             }else {
                 let max = pageSize > dataArray.length ? dataArray.length : pageSize * pageIndex
                 dispatch({
-                    type: Types.POPULAR_LOAD_MORE_SUCCESS,
+                    type: Types.TRENDING_LOAD_MORE_SUCCESS,
                     storeName,
                     pageIndex,
                     projectModes: dataArray.slice(0, max)

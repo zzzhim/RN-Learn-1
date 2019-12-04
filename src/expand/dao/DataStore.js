@@ -1,6 +1,9 @@
 import { AsyncStorage } from 'react-native'
+import Trending from 'GitHubTrending'
 
+export const FLAG_STORAGE = { flag_popular: 'popular', flag_trending: 'trending' }
 export default class DataStore {
+    
     /**
      * 保存数据
      * @param url
@@ -45,39 +48,53 @@ export default class DataStore {
     /**
      * 获取网络数据
      * @param url
+     * @param flag
      * @return { Promise } 
      */ 
-    fetchNetData(url) {
+    fetchNetData(url, flag) {
         return new Promise((resolve, reject) => {
-            fetch(url)
-                .then((res => {
-                    if(res.ok) {
-                        return res.json()
-                    }
-                    throw new Error('Network response was not ok')
-                }))
-                .then(res => {
-                    // 获取到数据之后先保存到本地
-                    this.saveData(url, res)
-                    resolve(res)
-                })
-                .catch(err => reject(err))
+            if(flag !== FLAG_STORAGE.flag_trending) {
+                fetch(url)
+                    .then((res => {
+                        if(res.ok) {
+                            return res.json()
+                        }
+                        throw new Error('Network response was not ok')
+                    }))
+                    .then(res => {
+                        // 获取到数据之后先保存到本地
+                        this.saveData(url, res)
+                        resolve(res)
+                    })
+                    .catch(err => reject(err))
+            }else {
+                new Trending().fetchTrending(url)
+                    .then(items => {
+                        if(!items) {
+                            throw new Error('responseData is null')
+                        }
+                        this.saveData(url, items)
+                        resolve(items)
+                    })
+                    .catch(err => reject(err))
+            }
         })
     }
 
     /**
      * 获取数据，优先获取本地数据，如果无本地数据或本地数据过期则获取网络数据
      * @param url
+     * @param flag
      * @return { Promise } 
      */ 
-    fetchData(url) {
+    fetchData(url, flag) {
         return new Promise((resolve, reject) => {
             this.fetchLocalData(url)
                 .then(wrapData => {
                     if(wrapData && DataStore.checkTimestampValid(wrapData.timestamp)) { // 当本地数据存在并且本地数据没有过期的时候返回本地数据
                         resolve(wrapData)
                     }else { // 当本地数据过期的时候请求网络数据
-                        this.fetchNetData(url)
+                        this.fetchNetData(url, flag)
                             .then(data => {
                                 resolve(this._wrapData(data))
                             })
@@ -85,7 +102,7 @@ export default class DataStore {
                     }
                 })
                 .catch(error => { // 当本地数据不存在的时候请求网络数据
-                    this.fetchNetData(url)
+                    this.fetchNetData(url, flag)
                             .then(data => {
                                 resolve(this._wrapData(data))
                             })

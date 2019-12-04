@@ -1,9 +1,9 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, DeviceInfo } from 'react-native'
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 0
+        marginTop: DeviceInfo.isIPhoneX_deprecated ? 30 : 0
     },
     welcome: {
         fontSize: 20,
@@ -11,7 +11,8 @@ export const styles = StyleSheet.create({
         margin: 10
     },
     tabStyle: {
-        minWidth: 50
+        // minWidth: 50 // fix minWidth 会导致tabStyle初次加载时闪烁
+        padding: 0
     },
     indicatorStyle: {
         height: 2,
@@ -19,8 +20,9 @@ export const styles = StyleSheet.create({
     },
     labelStyle: {
         fontSize: 13,
-        marginTop: 6,
-        marginBottom: 6
+        margin: 0
+        // marginTop: 6,
+        // marginBottom: 6
     },
     indicatorContainer: {
         alignItems: 'center'

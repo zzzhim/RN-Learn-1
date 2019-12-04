@@ -7,6 +7,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Entypo from 'react-native-vector-icons/Entypo'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { createAppContainer } from 'react-navigation'
+// import { DeviceInfo } from 'react-native'
 import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs'
 import { connect } from 'react-redux'
 
